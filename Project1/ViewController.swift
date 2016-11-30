@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct cellData {
+    
+    let cell : Int!
+    let text : String!
+    let image : UIImage!
+}
 class ViewController: UITableViewController {
     var pictures = [String]()
 
@@ -15,6 +21,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         title = "Storm viewer"
         
@@ -42,11 +49,38 @@ class ViewController: UITableViewController {
 
     //start cellforrow function
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = pictures[indexPath.row]
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        //cell.textLabel?.text = pictures[indexPath.row]
+        
+        
+        if indexPath.row % 2 == 0{
+            
+        let cell = Bundle.main.loadNibNamed("TableViewCell1", owner: self, options: nil)?.first as! TableViewCell1
+
+        cell.mainImageView.image = UIImage(named: pictures[indexPath.row])
+            cell.mainImageView.layer.cornerRadius = 99/2
+            cell.mainImageView.clipsToBounds = true
+        cell.mainLabel.text = pictures[indexPath.row]
+        
         return cell
+        }
+        else{
+        
+            let cell2 = Bundle.main.loadNibNamed("TableViewCell2", owner: self, options: nil)?.first as! TableViewCell2
+            
+           cell2.mainImageView2.image = UIImage(named: pictures[indexPath.row])
+            cell2.mainImageView2.layer.cornerRadius = 99/2
+            cell2.mainImageView2.clipsToBounds = true
+           cell2.mainLabel2.text = pictures[indexPath.row]
+            
+            return cell2
+        
+        }
     }
     //end cellforrow function
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
@@ -58,5 +92,8 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    
+    
 }
 

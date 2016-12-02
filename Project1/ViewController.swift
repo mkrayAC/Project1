@@ -16,12 +16,13 @@ struct cellData {
 }
 class ViewController: UITableViewController {
     var pictures = [String]()
-
+    
     //stard viewDidload
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+       
         
         title = "Storm viewer"
         
@@ -53,7 +54,10 @@ class ViewController: UITableViewController {
         //cell.textLabel?.text = pictures[indexPath.row]
         
         
+        
         if indexPath.row % 2 == 0{
+            
+            
             
         let cell = Bundle.main.loadNibNamed("TableViewCell1", owner: self, options: nil)?.first as! TableViewCell1
 
@@ -61,6 +65,7 @@ class ViewController: UITableViewController {
             cell.mainImageView.layer.cornerRadius = 99/2
             cell.mainImageView.clipsToBounds = true
         cell.mainLabel.text = pictures[indexPath.row]
+            
         
         return cell
         }
@@ -73,6 +78,8 @@ class ViewController: UITableViewController {
             cell2.mainImageView2.clipsToBounds = true
            cell2.mainLabel2.text = pictures[indexPath.row]
             
+         
+            
             return cell2
         
         }
@@ -81,6 +88,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+   
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 1: try loading the "Detail" view controller and typecasting it to be DetailViewController
@@ -90,10 +98,9 @@ class ViewController: UITableViewController {
             
             // 3: now push it onto the navigation controller
             navigationController?.pushViewController(vc, animated: true)
+            
+            
         }
     }
-    
-    
-    
 }
 

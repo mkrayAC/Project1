@@ -16,12 +16,22 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         title = selectedImage
         
         if let imageToLoad = selectedImage {
             imageView.image  = UIImage(named: imageToLoad)
+            
         }
         // Do any additional setup after loading the view.
+        
+            imageView.isUserInteractionEnabled = true
+            let longPG = UILongPressGestureRecognizer(target: self, action: #selector(self.memoryLongPressed))
+            longPG.minimumPressDuration = 1
+            imageView.addGestureRecognizer(longPG)
+            
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +49,41 @@ class DetailViewController: UIViewController {
         navigationController?.hidesBarsOnTap = false
     }
     
-
+    func memoryLongPressed(sender: UILongPressGestureRecognizer){
+        if sender.state == .began{
+            
+            let alertController = UIAlertController(title: "Guardar foto", message: "¿Desea guardar la imagen?", preferredStyle: .alert)
+            
+            let accion1 = UIAlertAction(title: "Sí",
+                                        style: UIAlertActionStyle.default) { _ in
+                                            alertController.dismiss(animated: true, completion: nil)
+                                            print("Sí")
+                                            UIImageWriteToSavedPhotosAlbum(self.imageView.image!, nil, nil, nil)
+            }
+            
+            
+            
+            let accion2 = UIAlertAction(title: "No",
+                                        style: UIAlertActionStyle.cancel) { _ in
+                                            print("no")
+            }
+            alertController.addAction(accion1)
+            alertController.addAction(accion2)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        if sender.state == .ended{
+        print("termino")
+            
+            
+        }
+        
+        
+    }
+    
+    
+   
+    
     /*
     // MARK: - Navigation
 

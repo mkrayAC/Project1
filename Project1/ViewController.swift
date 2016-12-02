@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
         
         super.viewDidLoad()
         
-       
+       self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         title = "Storm viewer"
         
@@ -83,6 +83,14 @@ class ViewController: UITableViewController {
             return cell2
         
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
   

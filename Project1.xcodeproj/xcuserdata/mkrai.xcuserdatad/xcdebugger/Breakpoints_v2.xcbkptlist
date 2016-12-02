@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Project1/DetailViewController.swift"
-            timestampString = "502332336.080988"
+            timestampString = "502404025.924531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "memoryLongPressed(sender:)"
             landmarkType = "7">
          </BreakpointContent>

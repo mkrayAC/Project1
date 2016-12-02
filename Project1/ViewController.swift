@@ -84,6 +84,8 @@ class ViewController: UITableViewController {
         
         }
     }
+    
+  
     //end cellforrow function
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100

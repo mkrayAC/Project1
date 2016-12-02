@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Social
+
 
 class DetailViewController: UIViewController {
 
@@ -22,15 +24,18 @@ class DetailViewController: UIViewController {
         if let imageToLoad = selectedImage {
             imageView.image  = UIImage(named: imageToLoad)
             
+            
+            
         }
         // Do any additional setup after loading the view.
+        
         
             imageView.isUserInteractionEnabled = true
             let longPG = UILongPressGestureRecognizer(target: self, action: #selector(self.memoryLongPressed))
             longPG.minimumPressDuration = 1
             imageView.addGestureRecognizer(longPG)
             
-        
+        self.navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(DetailViewController.barButtonItemClicked)), animated: true)
         
     }
 
@@ -48,6 +53,48 @@ class DetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.hidesBarsOnTap = false
     }
+    
+    func barButtonItemClicked(){
+        
+            
+            let alertController = UIAlertController(title: "Compartir", message: nil, preferredStyle: .actionSheet)
+            
+        
+        
+        let facebook = UIAlertAction(title: "Facebook", style: .default) { (_) in
+            print("Facebook")
+            let facebookService = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookService?.setInitialText("Mi imagen")
+            facebookService?.add(self.imageView.image)
+            self.present(facebookService!, animated: true, completion: nil)
+            
+        
+            
+        }
+        let twitter = UIAlertAction(title: "Twitter", style: .default) { (_) in
+            print("Twitter")
+            let twitterService = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            twitterService?.setInitialText("Mi imagen")
+            twitterService?.add(self.imageView.image)
+            self.present(twitterService!, animated: true, completion: nil)
+            
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            print("Cancel")
+            
+        }
+        
+        alertController.addAction(facebook)
+        alertController.addAction(twitter)
+        alertController.addAction(cancelAction)
+   
+        
+
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+    
     
     func memoryLongPressed(sender: UILongPressGestureRecognizer){
         if sender.state == .began{
